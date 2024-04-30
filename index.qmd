@@ -1,0 +1,12 @@
+---
+title: "Hitmontop"
+subtitle: "INFO 5001 Project"
+format: html
+editor: visual
+---
+
+The principal objective of our project is to comprehensively analyze and forecast student performances within high schools. Our aim is to investigate the intricate interconnections between students' academic grades, their inclination toward pursuing higher education, and various pertinent variables present within the dataset. Ultimately, our overarching ambition is to extract valuable estimations and profound insights from the dataset, illuminating the factors influencing student performance and facilitating a deeper understanding of educational outcomes.
+
+After data visualizations and machine learning results, we conclude that extra educational support and family educational support are the most important factors for students\' grades. Other important factors include mother education, past extra classes, etc.
+
+For final deliverable, we created a [shiny web](https://9prv02-miles-ma.shinyapps.io/project-elegant-hitmontop/ "Student Score Prediction") for parents to make their child's grade prediction. This allow parents to change some variables and see how they can better educate their children to improve the grades.

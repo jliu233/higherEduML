@@ -1,0 +1,55 @@
+---
+title: High School Student Grade Prediction
+subtitle: Which variables are important
+author: Team Hitmontop <br> Jiaqi Liu (jl4424), Miles Ma (hm387), Yihong He (yh827), Linlin Li (ll966)
+date: 12/04/2023
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+execute:
+  echo: false
+---
+
+## Topic and Motivation
+
+Analyze and predict student performances within high schools.
+
+Investigate the connections between students' grade and other variables present within the dataset.
+
+Develop predictive models illuminating the factors influencing student performance.
+
+## Introduce the data
+
+Datasets obtained from the UC Irvine machine learning repository, containing information about student achievements in secondary education from two Portuguese schools, covering the subjects of Math and Portuguese.
+
+-   Merged two datasets
+-   1044 rows and 35 columns
+
+Data source: <https://archive.ics.uci.edu/dataset/320/student+performance>
+
+## (Ineffective) Visualizations
+
+```{r}
+knitr::include_graphics("period.png")
+```
+
+## (Ineffective) Visualizations
+
+```{r}
+knitr::include_graphics("support.png")
+```
+
+## Highlights from EDA
+
+ML model tried: null (3.09), random forest (1.99), svm (2.07), lasso (1.43, chosen)
+
+```{r}
+knitr::include_graphics("feature.png")
+```
+
+## Conclusions + future work
+
+-   According to machine learning results, extra educational support and family educational support are the most important factors for students' grades. Other important factors include mother education, past extra classes, etc.
+-   Visualize how each individual's grade is estimated
+-   Introduce a shiny web to play and test our results from machine learning

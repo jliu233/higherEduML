@@ -1,0 +1,15 @@
+---
+title: "About"
+format: html
+editor: visual
+---
+
+This project was developed by **hitmontop** For [INFO 5001: Computing for Information Science](https://info5001.infosci.cornell.edu) at Cornell University. The team is comprised of the following team members.
+
+-   Team member 1: My name is Jiaqi Liu. I'm a MPS student studying information science. My focus area is data science.
+
+-   Team member 2: My name is Yihong He, a first year MPS IS student.
+
+-   Team member 3: My name is Miles Ma, MPS IS Student. My car license plate is CHATGPT.
+
+-   Team member 4: My name is Linlin Li, an information science student, with a focus on data science.

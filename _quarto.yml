@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  navbar:
+    left:
+      - href: index.qmd
+      - text: "Proposal"
+        href: proposal.qmd
+      - text: "Exploratory data analysis"
+        href: explore.qmd
+      - text: "Presentation"
+        href: presentation.qmd
+      - text: "Report"
+        href: report.qmd
+      - text: "Deliverable"
+        href: https://9prv02-miles-ma.shinyapps.io/project-elegant-hitmontop/
+      - text: "Appendices - Data Cleaning"
+        href: appendices.qmd
+      - text: "Appendices - Other ML Models"
+        href: appendix2.qmd
+      - text: "About"
+        href: about.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true

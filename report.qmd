@@ -1,0 +1,336 @@
+---
+title: "High School Student Performance Estimation"
+subtitle: "Report"
+format: html
+editor: visual
+execute:
+  echo: FALSE
+  warning: FALSE
+---
+
+# Introduction
+
+The principal objective of our project is to comprehensively analyze and forecast student performances within high schools. Our aim is to investigate the intricate interconnections between students' academic grades, their inclination toward pursuing higher education, and various pertinent variables present within the dataset. Additionally, our project seeks to develop predictive models leveraging machine learning techniques to anticipate students' grades based on the variables within the dataset. Ultimately, our overarching ambition is to extract valuable estimations and profound insights from the dataset, illuminating the factors influencing student performance and facilitating a deeper understanding of educational outcomes.
+
+# Main Conclusion
+
+After constructing models including a null model, random forest, support vector machine, and lasso regression to predict student scores, the root mean square error respectively are 3.09, 1.99, 2.07, and 1.43. Base on these findings, we choose our lasso regression model to make our score predict function. From this model, we identified strong predictors for predicting students' grades. The top five most important features are no extra educational support, have family educational support, mother education, do not pay for extra classes, and have past class failures. These are the essential predictors for our lasso model to make predictions on students' grades.
+
+# Justification of approach
+
+The first section delves into an exploration of factors that potentially impact the final grade and the willingness toward higher education. In this phase, various elements contributing to these two factors are analyzed using ggplot to create informative plots.
+
+Moving to the second part, our research utilizes null, linear regression, random forest regression, and lasso models to predict the final grade based on the identified factors. This predictive modeling aims to provide insights into forecasting student performance.
+
+As for the intended audience, we believe the students and parents can all be benifitted from our research. Students and parents always want to know how their academic performace would be before a class start. Based on our project, they can input their information into our lasso model, and the model would predict their future grade. By understanding the factors affecting grades, parents can support their children better academically, while students may gain insights into areas of focus for improving their academic performance.
+
+## Data description
+
+This project utilizes datasets obtained from the UC Irvine machine learning repository, containing information about student achievements in secondary education from two Portuguese schools, covering the subjects of Math and Portuguese.
+
+For data cleaning, we merge the data set of Math students and the data set of Portuguese students, arrange the data by descending order of their final grades, and rename all the variables to names with clearer description under snake case format. More information in appendix.
+
+-   What are the observations (rows) and the attributes (columns)?
+
+    The observations (rows) are instances or individual entries in the student dataset, representing specific cases or data points. The attributes (columns) refer to the various characteristics, features, or variables associated with the students. These columns encompass diverse information such as grades, travel time, and other student-related details. Each column holds specific information about the students being observed in the dataset.
+
+-   Why was this dataset created?
+
+    This Student Performance dataset was created by Paulo Cortez for studying student achievement in two Portuguese secondary schools. This data collection aimed to examine student grades, demographics, social factors, and school-related features. This attribute selection aligns with research goals.
+
+    We use skimr::skim() function to generate summary statistics and an overview of the dataset. The basic characteristics of the dataset, including the number of missing values, mean, standard deviation, swiftly grasp the structure, distribution, and potential issues within the data, providing a foundation for further data exploration and analysis.
+
+-   Who funded the creation of the dataset?
+
+    UC Irvine University.
+
+    Data source: https://archive.ics.uci.edu/dataset/320/student+performance
+
+-   What processes might have influenced what data was observed and recorded and what was not?
+
+    The data observed and recorded in this dataset were influenced by several factors:
+
+    Research Objectives: The data collection aligned with the research goal of studying student achievement in secondary education, leading to the inclusion of relevant data like student grades, demographics, social factors, and school-related features.
+
+    Educational Context: The dataset's focus on two Portuguese schools considered the unique characteristics of these schools, potentially including region-specific factors relevant to the research.
+
+    Data Collection Methods: Data was gathered through school reports and questionnaires, impacting the type of data collected. Questionnaires may have limited the data to survey-appropriate information.
+
+    Academic Subjects: The dataset is divided into separate datasets for Mathematics ("mat") and Portuguese language ("por"), reflecting the emphasis on these subjects and affecting the choice of recorded data.
+
+-   What preprocessing was done, and how did the data come to be in the form that you are using?
+
+    The data observed and recorded in this dataset were influenced by several factors:
+
+    Research Objectives: The data collection aligned with the research goal of studying student achievement in secondary education, leading to the inclusion of relevant data like student grades, demographics, social factors, and school-related features.
+
+    Educational Context: The dataset's focus on two Portuguese schools considered the unique characteristics of these schools, potentially including region-specific factors relevant to the research.
+
+    Data Collection Methods: Data was gathered through school reports and questionnaires, impacting the type of data collected. Questionnaires may have limited the data to survey-appropriate information.
+
+    Academic Subjects: The dataset is divided into separate datasets for Mathematics ("mat") and Portuguese language ("por"), reflecting the emphasis on these subjects and affecting the choice of recorded data.
+
+-   If people are involved, were they aware of the data collection and if so, what purpose did they expect the data to be used for?
+
+    Those involved in data collection, including researchers, teachers, and administrators, were likely aware of the study's objectives. The data was used for classification and regression tasks related to predicting student performance in Math and Portuguese. Researchers likely intended to gain insights into factors affecting achievement and test machine learning models for educational research.
+
+```{r}
+#import libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(forcats)
+library(tidyverse)
+library(viridis)
+library(scales)
+library(patchwork)
+```
+
+```{r}
+#import data
+student_data <- read.csv("data/student-cleaned.csv")
+skimr::skim(student_data)
+```
+
+## Design process
+
+Firstly we planned to use visualizations to different variables versus grade or willingness for higher education. However due to data limitation, there are not a lot of continuous data for visualization, and our guess on which variable is effective goes wrong from time to time. So after learning about machine learning, we think that is a good topic to include in our study, to see estimation possibilities without getting to know and making assumptions on the data.
+
+### Exploration for Grades related variables
+
+First, we would like to know about individual performance over time, so we would like to see how does the distribution of grades look like and change for each period?
+
+```{r}
+#first visualization
+exam_sequence <- c("first period", "second period", "final")
+student_data |>
+#draw the graph
+  ggplot(mapping = aes(x = factor(period, exam_sequence), y= score, fill = period)) +
+  geom_violin(trim = FALSE, scale = "count") +
+  geom_boxplot(width = 0.2, fill = "white", 
+               color = "black", outlier.color = "black") +
+  geom_line(aes(group = id), color = 'gray', linewidth = 0.2) +
+#change graph style
+  labs(
+    x = "period",
+    y = "Score of each period",
+    title = "Distribution of grades for each period",
+    subtitle = "each line represents a single student",
+    caption = "Source: UC Irvine Machine Learning Repository"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.text = element_text(size = 9),
+    plot.title = element_text(size = 15),
+    plot.margin = margin(5, 20, 5, 5)
+  ) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_discrete(breaks = c("first period", "second period", "final"))
+
+ggsave("period.png", width = 6, height = 4, dpi=300)
+```
+
+In this graph, we can see that the final period has the most amount of outliers, and the first period has the least. For the boxplot for each period, even though the final period's values of Q1 and Q3 are different from the first and second periods, they three have similar median value. From the individual lines，we can generally see both grade increase and decrease. However, it is especially hard to get away from a grade of zero.
+
+Besides time variable, some other variables we think may affect grades are educational support. So we generate a graph to see if that is the case.
+
+```{r}
+#second visualization
+student_data |>
+#draw the graph
+  ggplot(mapping = aes(x = period, y= score)) +
+  geom_boxplot(position = "dodge", width = 0.6) +
+  facet_grid(vars(family_educational_support), vars(extra_educational_support)) +
+#change graph style
+  theme_minimal() +
+   theme(
+    legend.position = "bottom", 
+    axis.text = element_text(size = 9),
+    plot.title = element_text(size = 15),
+    plot.margin = margin(5, 20, 5, 5),
+    strip.text = element_text(size = 11, face = "bold"),
+  ) +
+  scale_fill_brewer(palette = "Pastel1") +
+  labs(title = "Distribution of Scores by period and Family Educational Support",
+       x = "Period",
+       y = "Score",
+       fill = "Extra Educational Support",
+       caption = "Source: UC Irvine Machine Learning Repository"
+       )
+
+ggsave("support.png", width = 8, height = 5, dpi=300)
+```
+
+In this graph, we can see that the medians of each boxplot are very similar, which indicates that with or without school or family support has little impact on students' median scores. Most boxplot has little outliers. But only the boxplot representing the students who only have school support has the most amount of outliers.
+
+### Exploration for higher education willingness related variables
+
+Based our first guess, we think the willingness to go for higher eductaion may be related to guardian's education status and job.
+
+```{r}
+#third visualization
+# graph according to guardian education
+graph_edu <- student_data |>
+#draw the graph
+  ggplot(aes(fill = guardian_education, 
+             y = higher_education_aspiration)) +
+  geom_bar(position = "fill") +
+#change graph style
+  theme_minimal() +
+  scale_x_continuous(labels = label_percent()) + 
+  theme(legend.position = "bottom") + 
+  guides(fill = guide_legend(nrow = 5)) +
+  labs(
+    x = NULL,
+    y = "Higher education",
+    title = "Guardian's background's influence
+    on higher education aspiration"
+  ) +
+  scale_fill_discrete("Guardian education",
+                      labels=c("none", "primary education", "5th to 9th grade",
+                               "secondary education", "higher education"))
+# graph according to guardian job
+graph_job <- student_data |>
+#draw the graph
+  ggplot(aes(fill = guardian_job, 
+             y = higher_education_aspiration)) +
+  geom_bar(position = "fill") +
+#change graph style
+  theme_minimal() +
+  scale_x_continuous(labels = label_percent()) +
+  theme(legend.position = "bottom") + 
+  guides(fill = guide_legend(nrow = 5)) +
+  labs(
+    x = NULL,
+    y = "Higher education",
+    title = "Guardian's job's influence
+    on higher education aspiration",
+    caption = "Source: UC Irvine Machine Learning Repository"
+  ) + 
+  scale_fill_discrete("Guardian job")
+
+#combine two graphs
+(graph_edu | graph_job)
+
+ggsave("influence.png", width = 10, height = 6, dpi=300)
+```
+
+In this graph, we can see that the student guardian's education background is positively related to higher education aspiration. We can see more than 25% of student's who wants higher education have guardian from higher education, and more than 50% have at least secondary education. These stats for students not wanting higher education is about 5% and 30%. We can see a similar effect in terms of jobs, as students with guardians in teacher and health industry are much more likely to want higher education.
+
+### Exploration for Grades Estimation
+
+Since the variables related to grades are not the same as what we estimate, and this may happen from time to time, so we should also prepare a way where we don't have to decide which variables by ourselves. And this is why we turn to machine learning. We tried Penalized logistic regression model, Random Forest Model, and Support Vector Machine and see which one produces lower root mean square error in this dataset. After constructing our feature engineering and hyper-parameter tuning, we concluded that our lasso model has the best performance in predicting students' grades.
+
+After constructing models including a null model, random forest, support vector machine, and lasso regression to predict student scores, the root mean square error respectively are 3.09, 1.99, 2.07, and 1.43. Base on these findings, we choose our lasso regression model to make our score predict function. More in the appendix.
+
+#### Lasso Model
+
+```{r}
+library(vip)
+library(tidymodels)
+library(readr)
+library(dplyr)
+library(glmnet)
+library(textrecipes)
+library(forcats)
+library(ggplot2)
+
+#set.seed(2020)
+student <- read_csv(file = "data/student-cleaned.csv") 
+theme_set(theme_minimal())
+ctrl_grid <- control_grid(save_workflow = TRUE)
+
+student_split <- initial_split(data = student, prop = 0.75, strata = score)
+student_train <- training(student_split)
+student_test <- testing(student_split)
+student_folds <- vfold_cv(data = student_train, v = 10, strata = score)
+
+text_columns <- student_train |>
+  select_if(is.character) |>
+  names()
+
+# Set Recipe
+lasso_rec <- 
+  recipe(score ~ ., data = student_train) |>
+  step_tokenize(text_columns, token = "words") |>
+  step_tokenfilter(text_columns, max_tokens = 500) |>  # just remain part of the tokens
+  step_tfidf(text_columns) 
+  
+# Set up the logistic regression model with Lasso penalty
+lasso_mod <- linear_reg(penalty = tune(), mixture = 1) |> 
+  set_engine("glmnet") |> 
+  set_mode("regression")
+
+# Create a grid of at least 30 penalty values
+lasso_grid <- grid_regular(penalty(), levels = 30)
+
+# Set up the workflow for tuning
+lasso_wf <- workflow() |>
+  add_recipe(lasso_rec) |>
+  add_model(lasso_mod)
+
+# Fit with Cross-Validation
+set.seed(2020)
+lasso_rs <- tune_grid(
+  object = lasso_wf,
+  resamples = student_folds,
+  grid = lasso_grid,
+  control = control_resamples(save_pred = TRUE, save_workflow = TRUE)
+)
+
+#Selecting Top 5 Best Models
+lasso_result <- lasso_rs |>
+  show_best(metric = "rmse" , n =5)
+
+lasso_result
+
+# generate ROC curve
+  autoplot(lasso_rs, metric = "rmse") +
+  labs(
+    title = "Lasso model performance across regularization penalties",
+    subtitle = "Performance metrics can be used to identity the best penalty"
+  )
+
+
+best_fit <- fit_best(lasso_rs)
+
+# extract parsnip model fit
+student_imp <- extract_fit_parsnip(best_fit) |>
+  vi(method = "model")
+
+# Replace "tfidf_blurb_" with an empty string in the "variable" column
+student_imp$Variable <- sub("tfidf_", "", student_imp$Variable)
+
+# clean up the data frame for visualization
+student_imp |>
+  # extract 20 most important n-grams
+  slice_max(order_by = Importance, n = 20) |>
+  mutate(Variable = fct_reorder(.f = Variable, .x = Importance)) |>
+  ggplot(mapping = aes(
+    x = Importance,
+    y = Variable
+  )) +
+  geom_col() +
+  labs(
+    y = NULL,
+    title = "Most relevant features for predicting students' score",
+    subtitle = "Lasso Regression Model"
+  )
+```
+
+As shown in this bar chart, we can see that there are multiple features with strong impact on the model prediction. The top 1 influential feature is a student without extra educational support. From our understanding, the academic support from a single class is very limit. Extra support like additional office hour to answer students' questions, mental counselors to maintain students' mental health, and parents to provide guidance for students' academic and life path are important. Students who are not able to access those additional resource can have a very difficult study experience. We also noticed that the least influential feature is there is no internet at home. We think it's because the internet is very prevalent now that students can access to it from many locations, like schools, cafes, and libraries. The home without internet access can barely limit students' academic performance.
+
+# Limitations
+
+First limitation is about data count. Although we combined the two datasets, there are only 1000 data points to train and test. It is enough to be a dryrun but more data is needed for machine learning to train a more accurate model.
+
+Second limitation is about subjects. This dataset includes only two subjects, and we have joined the dataset so there is not a lot of research about it. In the real world situation, the number of subject is much larger, and may have a larger effect than other variables to grades. So our model selected may not be the best way to train and estimate the grades for a larger scale of classes.
+
+Lastly, there are not a lot of continuous variables in our dataset. As a result, we can hardly make visualizations using scatter plots for seeing the relationship between grades and other variables. If more continuous variables are given, we can definitely see some related variables just by graphing.
+
+# Acknowledgments
+
+Great thanks to UC Irvine machine learning repository for the dataset as it is well documented and easy to use.
+
+Great thanks to TAs and Instructor for the help and consultations along the way.

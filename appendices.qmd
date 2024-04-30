@@ -1,0 +1,137 @@
+---
+title: "High School Student Performance Estimation"
+subtitle: "Appendix to report - Data Cleaning"
+format: html
+editor: visual
+execute:
+  echo: true
+---
+
+# Data cleaning
+
+```{r}
+#import libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(forcats)
+library(tidyverse)
+library(viridis)
+library(scales)
+library(patchwork)
+```
+
+```{r}
+#import data
+mat_data <- read.csv("data/student-mat.csv", sep = ";")
+por_data <- read.csv("data/student-por.csv", sep = ";")
+```
+
+```{r}
+#data joining
+#add major to both dataset
+mat_data <- mat_data |>
+  mutate(major = "Math")
+por_data <- por_data |>
+  mutate(major = "Portuguese")
+rm(student_data)
+# Binding the rows of the two datasets together
+merged_data <- bind_rows(mat_data, por_data)
+```
+
+```{r}
+#data cleaning
+student_data <- merged_data |>
+#rename columns for readability
+  rename(
+    student_school = school,
+    student_sex = sex,
+    student_age = age,
+    home_address_type = address,
+    family_size = famsize,
+    parent_cohabitation_status = Pstatus,
+    mother_education = Medu,
+    father_education = Fedu,
+    mother_job = Mjob,
+    father_job = Fjob,
+    school_choice_reason = reason,
+    student_guardian = guardian,
+    travel_time = traveltime,
+    weekly_study_time = studytime,
+    past_class_failures = failures,
+    extra_educational_support = schoolsup,
+    family_educational_support = famsup,
+    paid_extra_classes = paid,
+    extra_curricular_activities = activities,
+    attended_nursery_school = nursery,
+    higher_education_aspiration = higher,
+    internet_access_at_home = internet,
+    romantic_relationship = romantic,
+    family_relationship_quality = famrel,
+    free_time_after_school = freetime,
+    going_out_with_friends = goout,
+    workday_alcohol_consumption = Dalc,
+    weekend_alcohol_consumption = Walc,
+    current_health_status = health,
+    school_absences = absences,
+    first_period_grade = G1,
+    second_period_grade = G2,
+    final_grade = G3
+  ) |>
+  #rearrrange the rows
+  arrange(desc(final_grade),desc(mother_education)) |>
+  mutate(id = row_number())
+
+write_csv(x = student_data, file = "data/student.csv")
+```
+
+```{r}
+#data wrangling specific for grade data
+student_data <- student_data |>
+#pivot longer to have one grade per row
+  pivot_longer(cols = c(first_period_grade, second_period_grade, final_grade),
+               names_to = "period",
+               values_to = "score") |>
+#refine the period names, convert educational support indicators to text.
+  mutate(period = recode(period, 'first_period_grade' =  'first period',
+                         'second_period_grade' = 'second period', 
+                         'final_grade' = 'final'),
+         extra_educational_support = recode(extra_educational_support, 
+                                            "no" = "no school support", 
+                                            "yes" = "school support"),
+         family_educational_support = recode(family_educational_support, 
+                                            "no" = "no family support", 
+                                            "yes" = "family support")) |>
+#rearrange the sequence of the periods
+  mutate(period = fct_relevel(period, 'first period' ,'second period', 'final'))
+
+```
+
+```{r}
+#data wrangling specific for higher education data
+student_data <- student_data |>
+  mutate(mother_education = as.character(mother_education),
+        father_education = as.character(father_education),
+        guardian_education = case_when(
+          student_guardian == "mother" ~ mother_education,
+          student_guardian == "father" ~ father_education
+        )) |>
+  drop_na(guardian_education) |>
+  mutate(guardian_education = case_when(
+      guardian_education == 0 ~ "0:none",
+      guardian_education == 1 ~ "1:primary education",
+      guardian_education == 2 ~ "2:5th to 9th grade",
+      guardian_education == 3 ~ "3:secondary education",
+      guardian_education == 4 ~ "4:higher education"
+  )) |>
+  mutate(guardian_job = case_when(
+          student_guardian == "mother" ~ mother_job,
+          student_guardian == "father" ~ father_job
+        )) |>
+  drop_na(guardian_job) |>
+  mutate(guardian_job = fct_relevel(guardian_job, 
+            'at_home', 'services' ,'other', 'teacher', 'health'),)|>
+  mutate(guardian_job = recode(guardian_job, "at_home" = "at home"))
+
+write_csv(x = student_data, file = "data/student-cleaned.csv")
+```

@@ -1,0 +1,250 @@
+[
+  {
+    "objectID": "report.html#data-description",
+    "href": "report.html#data-description",
+    "title": "Project title",
+    "section": "Data description",
+    "text": "Data description"
+  },
+  {
+    "objectID": "report.html#design-process",
+    "href": "report.html#design-process",
+    "title": "Project title",
+    "section": "Design process",
+    "text": "Design process"
+  },
+  {
+    "objectID": "presentation.html#introduce-the-topic-and-motivation",
+    "href": "presentation.html#introduce-the-topic-and-motivation",
+    "title": "Presentation title",
+    "section": "Introduce the topic and motivation",
+    "text": "Introduce the topic and motivation\nQuarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+  },
+  {
+    "objectID": "presentation.html#introduce-the-data",
+    "href": "presentation.html#introduce-the-data",
+    "title": "Presentation title",
+    "section": "Introduce the data",
+    "text": "Introduce the data\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
+  },
+  {
+    "objectID": "presentation.html#highlights-from-eda",
+    "href": "presentation.html#highlights-from-eda",
+    "title": "Presentation title",
+    "section": "Highlights from EDA",
+    "text": "Highlights from EDA\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\n[1] 2"
+  },
+  {
+    "objectID": "presentation.html#inferencemodelingother-analysis",
+    "href": "presentation.html#inferencemodelingother-analysis",
+    "title": "Presentation title",
+    "section": "Inference/modeling/other analysis",
+    "text": "Inference/modeling/other analysis\nYour results here"
+  },
+  {
+    "objectID": "presentation.html#inferencemodelingother-analysis-1",
+    "href": "presentation.html#inferencemodelingother-analysis-1",
+    "title": "Presentation title",
+    "section": "Inference/modeling/other analysis",
+    "text": "Inference/modeling/other analysis\nYour results here"
+  },
+  {
+    "objectID": "presentation.html#conclusions-future-work",
+    "href": "presentation.html#conclusions-future-work",
+    "title": "Presentation title",
+    "section": "Conclusions + future work",
+    "text": "Conclusions + future work"
+  },
+  {
+    "objectID": "explore.html",
+    "href": "explore.html",
+    "title": "Project title",
+    "section": "",
+    "text": "Objective(s)\nState the question(s) you are answering or the problem(s) you are solving clearly.\n\n\nData collection and cleaning\nHave an initial draft of your data cleaning appendix. Document every step that takes your raw data file(s) and turns it into the analysis-ready data set that you would submit with your final project. Include text narrative describing your data collection (downloading, scraping, surveys, etc) and any additional data curation/cleaning (merging data frames, filtering, transformations of variables, etc). Include code for data curation/cleaning, but not collection.\n\n\nData description\nHave an initial draft of your data description section. Your data description should be about your analysis-ready data.\n\n\nData limitations\nIdentify any potential problems with your dataset.\n\n\nExploratory data analysis\nPerform an (initial) exploratory data analysis.\n\n\nQuestions for reviewers\nList specific questions for your peer reviewers and project mentor to answer in giving you feedback on this phase."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by [team name] For INFO 5001: Computing for Information Science at Cornell University. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.).\n…"
+  },
+  {
+    "objectID": "appendices.html",
+    "href": "appendices.html",
+    "title": "Project title",
+    "section": "",
+    "text": "Data cleaning\n\n\nOther appendicies (as necessary)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "TEAM NAME",
+    "section": "",
+    "text": "TODO: Add project abstract here.\nTODO: Add links to published deliverable(s) here (if published at a separate location). Also update the navigation bar in quarto.yml to include a direct link to relevant locations."
+  },
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Project title",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(skimr)"
+  },
+  {
+    "objectID": "proposal.html#problem-or-question",
+    "href": "proposal.html#problem-or-question",
+    "title": "Project title",
+    "section": "Problem or question",
+    "text": "Problem or question\n\nIdentify the problem you will solve or the question you will answer\nExplain why you think this topic is important.\nIdentify the types of data/variables you will use.\nState the major deliverable(s) you will create to solve this problem/answer this question."
+  },
+  {
+    "objectID": "proposal.html#introduction-and-data",
+    "href": "proposal.html#introduction-and-data",
+    "title": "Project title",
+    "section": "Introduction and data",
+    "text": "Introduction and data\nIf you are using a dataset:\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+  },
+  {
+    "objectID": "proposal.html#glimpse-of-data",
+    "href": "proposal.html#glimpse-of-data",
+    "title": "Project title",
+    "section": "Glimpse of data",
+    "text": "Glimpse of data\n\n# add code here"
+  },
+  {
+    "objectID": "proposal.html#problem-or-question-1",
+    "href": "proposal.html#problem-or-question-1",
+    "title": "Project title",
+    "section": "Problem or question",
+    "text": "Problem or question\n\nIdentify the problem you will solve or the question you will answer\nExplain why you think this topic is important.\nIdentify the types of data/variables you will use.\nState the major deliverable(s) you will create to solve this problem/answer this question."
+  },
+  {
+    "objectID": "proposal.html#introduction-and-data-1",
+    "href": "proposal.html#introduction-and-data-1",
+    "title": "Project title",
+    "section": "Introduction and data",
+    "text": "Introduction and data\nIf you are using a dataset:\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+  },
+  {
+    "objectID": "proposal.html#glimpse-of-data-1",
+    "href": "proposal.html#glimpse-of-data-1",
+    "title": "Project title",
+    "section": "Glimpse of data",
+    "text": "Glimpse of data\n\n# add code here"
+  },
+  {
+    "objectID": "proposal.html#problem-or-question-2",
+    "href": "proposal.html#problem-or-question-2",
+    "title": "Project title",
+    "section": "Problem or question",
+    "text": "Problem or question\n\nIdentify the problem you will solve or the question you will answer\nExplain why you think this topic is important.\nIdentify the types of data/variables you will use.\nState the major deliverable(s) you will create to solve this problem/answer this question."
+  },
+  {
+    "objectID": "proposal.html#introduction-and-data-2",
+    "href": "proposal.html#introduction-and-data-2",
+    "title": "Project title",
+    "section": "Introduction and data",
+    "text": "Introduction and data\nIf you are using a dataset:\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+  },
+  {
+    "objectID": "proposal.html#glimpse-of-data-2",
+    "href": "proposal.html#glimpse-of-data-2",
+    "title": "Project title",
+    "section": "Glimpse of data",
+    "text": "Glimpse of data\n\n# add code here"
+<<<<<<< HEAD
+  },
+  {
+    "objectID": "appendices.html",
+    "href": "appendices.html",
+    "title": "Project title",
+    "section": "",
+    "text": "Data cleaning\n\n\nOther appendicies (as necessary)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by hitmontop For INFO 5001: Computing for Information Science at Cornell University. The team is comprised of the following team members."
+  },
+  {
+    "objectID": "presentation.html#introduce-the-topic-and-motivation",
+    "href": "presentation.html#introduce-the-topic-and-motivation",
+    "title": "Presentation title",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+  },
+  {
+    "objectID": "presentation.html#introduce-the-data",
+    "href": "presentation.html#introduce-the-data",
+    "title": "Presentation title",
+    "section": "Introduce the data",
+    "text": "Introduce the data\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
+  },
+  {
+    "objectID": "presentation.html#highlights-from-eda",
+    "href": "presentation.html#highlights-from-eda",
+    "title": "Presentation title",
+    "section": "Highlights from EDA",
+    "text": "Highlights from EDA\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\n[1] 2"
+  },
+  {
+    "objectID": "presentation.html#inferencemodelingother-analysis",
+    "href": "presentation.html#inferencemodelingother-analysis",
+    "title": "Presentation title",
+    "section": "Inference/modeling/other analysis",
+    "text": "Inference/modeling/other analysis\nYour results here"
+  },
+  {
+    "objectID": "presentation.html#inferencemodelingother-analysis-1",
+    "href": "presentation.html#inferencemodelingother-analysis-1",
+    "title": "Presentation title",
+    "section": "Inference/modeling/other analysis",
+    "text": "Inference/modeling/other analysis\nYour results here"
+  },
+  {
+    "objectID": "presentation.html#conclusions-future-work",
+    "href": "presentation.html#conclusions-future-work",
+    "title": "Presentation title",
+    "section": "Conclusions + future work",
+    "text": "Conclusions + future work"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "TEAM NAME",
+    "section": "",
+    "text": "TODO: Add project abstract here.\nTODO: Add links to published deliverable(s) here (if published at a separate location). Also update the navigation bar in quarto.yml to include a direct link to relevant locations."
+  },
+  {
+    "objectID": "report.html#data-description",
+    "href": "report.html#data-description",
+    "title": "Project title",
+    "section": "Data description",
+    "text": "Data description"
+  },
+  {
+    "objectID": "report.html#design-process",
+    "href": "report.html#design-process",
+    "title": "Project title",
+    "section": "Design process",
+    "text": "Design process"
+  },
+  {
+    "objectID": "explore.html",
+    "href": "explore.html",
+    "title": "Project title",
+    "section": "",
+    "text": "Objective(s)\nState the question(s) you are answering or the problem(s) you are solving clearly.\n\n\nData collection and cleaning\nHave an initial draft of your data cleaning appendix. Document every step that takes your raw data file(s) and turns it into the analysis-ready data set that you would submit with your final project. Include text narrative describing your data collection (downloading, scraping, surveys, etc) and any additional data curation/cleaning (merging data frames, filtering, transformations of variables, etc). Include code for data curation/cleaning, but not collection.\n\n\nData description\nHave an initial draft of your data description section. Your data description should be about your analysis-ready data.\n\n\nData limitations\nIdentify any potential problems with your dataset.\n\n\nExploratory data analysis\nPerform an (initial) exploratory data analysis.\n\n\nQuestions for reviewers\nList specific questions for your peer reviewers and project mentor to answer in giving you feedback on this phase."
+  },
+  {
+    "objectID": "presentation.html",
+    "href": "presentation.html",
+    "title": "Presentation title",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+=======
+>>>>>>> 9cee5f376554d62b0e57ba1cafe94bd6c1ab2d06
+  }
+]
